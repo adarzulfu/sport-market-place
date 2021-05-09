@@ -1,24 +1,29 @@
 package com.example.hilt.scene.productlist
 
-import androidx.navigation.fragment.findNavController
 import com.example.hilt.base.BaseFragment
 import com.example.hilt.databinding.FragmentProductListBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class ProductListFragment : BaseFragment<FragmentProductListBinding>() {
+@AndroidEntryPoint
+class ProductListFragment :
+    BaseFragment<FragmentProductListBinding, ProductListViewModel>(ProductListViewModel::class) {
+
+    private var adapter: ProductListAdapter = ProductListAdapter()
 
     override fun provideViewBinding(): FragmentProductListBinding =
         FragmentProductListBinding.inflate(layoutInflater)
 
     override fun initialize() {
         super.initialize()
+        binding.recyclerViewProductList.adapter = adapter
+
+        viewModel.loadProductList()
     }
 
     override fun observeData() {
         super.observeData()
-        binding.buttonNext.setOnClickListener {
-            val action =
-                ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment()
-            findNavController().navigate(action)
+        viewModel.productListLiveData.observe(viewLifecycleOwner) {
+            adapter.updateProductList(it)
         }
     }
 }
