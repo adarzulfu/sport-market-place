@@ -6,13 +6,17 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity<T : ViewBinding> : AppCompatActivity() {
 
-    lateinit var binding: ViewBinding
+    lateinit var binding: T
     abstract fun provideViewBinding(): T
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        binding = provideViewBinding()
-        super.onCreate(savedInstanceState)
+    open fun initialize(savedInstanceState: Bundle?) {
+        // Do nothing in here. Child classes should implement when necessary
     }
 
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = provideViewBinding()
+        setContentView(binding.root)
+        initialize(savedInstanceState)
+    }
 }

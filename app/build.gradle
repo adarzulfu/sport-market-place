@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
 }
 
 android {
@@ -10,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.hilt"
-        minSdkVersion 16
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -52,6 +53,10 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$androidKtx_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$navgraph_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navgraph_version"
+
     testImplementation "junit:junit:$junit_version"
     androidTestImplementation "androidx.test.ext:junit:$junitext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
