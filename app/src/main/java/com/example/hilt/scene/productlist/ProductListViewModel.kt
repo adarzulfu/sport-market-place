@@ -19,11 +19,32 @@ class ProductListViewModel @Inject constructor(
     val productListLiveData: LiveData<List<ProductUIModel>>
         get() = _productListLiveData
 
+    private var initialProductList: List<ProductUIModel>? = null
+
     fun loadProductList() = viewModelScope.launch {
         getProductListUseCase.run(UseCase.None).either(::handleFailure, ::handleProductList)
     }
 
     private fun handleProductList(productLis: List<ProductUIModel>) {
         _productListLiveData.value = productLis
+        initialProductList = productLis
+    }
+
+    fun onQueryTextChange(queryText: String) {
+        _productListLiveData.value = if (queryText.isEmpty()) {
+            initialProductList
+        } else {
+            filterProductList(queryText)
+        }
+    }
+
+
+    private fun filterProductList(queryText: String): List<ProductUIModel>? {
+        return initialProductList?.filter {
+            it.productName.contains(queryText)
+                    || it.description.contains(queryText)
+                    || it.groupName.contains(queryText)
+                    || it.price.contains(queryText)
+        }
     }
 }
