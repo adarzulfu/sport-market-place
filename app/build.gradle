@@ -43,6 +43,8 @@ android {
 
 dependencies {
 
+
+    implementation "io.mockk:mockk:$mockk_version"
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -60,6 +62,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$navgraph_version"
 
     testImplementation "junit:junit:$junit_version"
+    testImplementation "androidx.arch.core:core-testing:$archtesting_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
     androidTestImplementation "androidx.test.ext:junit:$junitext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 

@@ -40,7 +40,7 @@ object NetworkModule {
     }
 
     @Provides
-    @Named(REVIEW)
+    @Named(NAMED_REVIEW)
     fun provideReviewRetrofit(client: Lazy<OkHttpClient>, moshi: Moshi): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -49,7 +49,7 @@ object NetworkModule {
             .build()
 
     @Provides
-    @Named(PRODUCT)
+    @Named(NAMED_PRODUCT)
     fun provideProductRetrofit(client: Lazy<OkHttpClient>, moshi: Moshi): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
@@ -58,15 +58,15 @@ object NetworkModule {
             .build()
 
     @Provides
-    fun provideProductService(@Named(PRODUCT) retrofit: Retrofit): ProductService =
+    fun provideProductService(@Named(NAMED_PRODUCT) retrofit: Retrofit): ProductService =
         retrofit.create(ProductService::class.java)
 
     @Provides
-    fun provideReviewServiceService(@Named(REVIEW) retrofit: Retrofit): ReviewService =
+    fun provideReviewServiceService(@Named(NAMED_REVIEW) retrofit: Retrofit): ReviewService =
         retrofit.create(ReviewService::class.java)
 
 
-    private const val CLIENT_TIME_OUT_SEC = 30L
-    private const val REVIEW = "Review"
-    private const val PRODUCT = "Product"
+    const val CLIENT_TIME_OUT_SEC = 30L
+    const val NAMED_REVIEW = "Review"
+    const val NAMED_PRODUCT = "Product"
 }

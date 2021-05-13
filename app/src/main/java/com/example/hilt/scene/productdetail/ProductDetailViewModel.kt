@@ -21,7 +21,7 @@ class ProductDetailViewModel @Inject constructor(
     val reviewListLiveData: LiveData<List<ReviewUIModel>>
         get() = _reviewListLiveData
 
-    var productId: String = ""
+    private var productId: String = ""
 
 
     fun saveProductId(productId: String) {
