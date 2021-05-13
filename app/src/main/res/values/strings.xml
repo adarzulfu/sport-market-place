@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">hilt</string>
+    <string name="app_name">Adidas</string>
 
     <string name="common_error_network_connection">No internet connection</string>
     <string name="common_error_unknown">Unknown error</string>
@@ -9,6 +9,7 @@
     <string name="common_yes">Yes</string>
     <string name="common_no">No</string>
 
+    <string name="rating_hint">Type your comment here</string>
     <string name="rating_title">Add Your Rating</string>
     <string name="transition_name_product_view">productImageTransition</string>
 

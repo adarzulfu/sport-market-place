@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.hilt.R
 import com.example.hilt.base.BaseFragment
 import com.example.hilt.databinding.FragmentProductListBinding
+import com.example.hilt.internal.ext.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,6 +50,7 @@ class ProductListFragment :
 
 
     override fun onItemSelected(imageView: ImageView, uiModel: ProductUIModel) {
+        imageView.hideKeyboard()
         navigateToDetail(imageView, uiModel)
     }
 

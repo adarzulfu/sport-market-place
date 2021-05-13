@@ -12,7 +12,7 @@ class ProductListAdapter(val clickListener: ProductItemClickListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ProductViewHolder(ItemProductBinding.inflate(layoutInflater))
+        return ProductViewHolder(ItemProductBinding.inflate(layoutInflater, parent, false))
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
@@ -31,9 +31,9 @@ class ProductListAdapter(val clickListener: ProductItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(uiModel: ProductUIModel) {
             with(binding) {
-                textViewGroupName.text = uiModel.groupName
                 textViewProductDescription.text = uiModel.description
                 textViewProductName.text = uiModel.productName
+                textViewProductPrice.text = uiModel.price
                 root.setOnClickListener {
                     imageViewPreview.transitionName = uiModel.id
                     clickListener.onItemSelected(imageViewPreview, uiModel)

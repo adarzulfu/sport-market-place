@@ -56,6 +56,7 @@ open class RatingDialogManager(
 
     private fun createEditTextView(): EditText {
         val editText = AppCompatEditText(context)
+        editText.hint = context.resources.getString(R.string.rating_hint)
         val layoutParams = createCommonLayoutParams(width = LinearLayout.LayoutParams.MATCH_PARENT)
         editText.layoutParams = layoutParams
         return editText
