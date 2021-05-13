@@ -18,7 +18,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        buildConfigField "String", "BASE_URL", BASE_URL
+        buildConfigField "String", "BASE_URL_PRODUCT", BASE_URL_PRODUCT
+        buildConfigField "String", "BASE_URL_REVIEW", BASE_URL_REVIEW
     }
 
     buildFeatures {
@@ -50,7 +51,7 @@ dependencies {
     implementation "com.squareup.moshi:moshi-kotlin:$moshi_version"
     implementation "com.squareup.moshi:moshi-adapters:$moshi_version"
     implementation "com.serjltt.moshi:moshi-lazy-adapters:$moshiLazyAdapter_version"
-    implementation"androidx.core:core-ktx:$androidKtx_version"
+    implementation "androidx.core:core-ktx:$androidKtx_version"
     implementation "androidx.fragment:fragment-ktx:$androidKtx_version"
     implementation "com.google.android.material:material:$material_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayout_version"

@@ -2,6 +2,7 @@ package com.example.hilt.internal.injection.module
 
 import com.example.hilt.BuildConfig
 import com.example.hilt.data.remote.ProductService
+import com.example.hilt.data.remote.ReviewService
 import com.squareup.moshi.Moshi
 import dagger.Lazy
 import dagger.Module
@@ -13,6 +14,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -38,17 +40,33 @@ object NetworkModule {
     }
 
     @Provides
-    fun provideRetrofit(client: Lazy<OkHttpClient>, moshi: Moshi): Retrofit =
+    @Named(REVIEW)
+    fun provideReviewRetrofit(client: Lazy<OkHttpClient>, moshi: Moshi): Retrofit =
         Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(BuildConfig.BASE_URL)
+            .baseUrl(BuildConfig.BASE_URL_REVIEW)
             .callFactory { client.get().newCall(it) }
             .build()
 
     @Provides
-    fun provideApiService(retrofit: Retrofit): ProductService =
+    @Named(PRODUCT)
+    fun provideProductRetrofit(client: Lazy<OkHttpClient>, moshi: Moshi): Retrofit =
+        Retrofit.Builder()
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .baseUrl(BuildConfig.BASE_URL_PRODUCT)
+            .callFactory { client.get().newCall(it) }
+            .build()
+
+    @Provides
+    fun provideProductService(@Named(PRODUCT) retrofit: Retrofit): ProductService =
         retrofit.create(ProductService::class.java)
+
+    @Provides
+    fun provideReviewServiceService(@Named(REVIEW) retrofit: Retrofit): ReviewService =
+        retrofit.create(ReviewService::class.java)
 
 
     private const val CLIENT_TIME_OUT_SEC = 30L
+    private const val REVIEW = "Review"
+    private const val PRODUCT = "Product"
 }

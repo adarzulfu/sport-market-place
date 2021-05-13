@@ -10,10 +10,10 @@ class ProductRemoteDataSource @Inject constructor(private val service: ProductSe
     BaseRemoteDataSource() {
 
     suspend fun requestProductList() = invoke {
-        service.getProductList()
+        service.requestGetProductList()
     }
 
     suspend fun requestSingleProduct(id: String) = invoke {
-        service.getSingleProduct(id)
+        service.requestGetSingleProduct(id)
     }
 }

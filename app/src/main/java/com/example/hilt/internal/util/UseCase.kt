@@ -22,7 +22,6 @@ import kotlinx.coroutines.withContext
 abstract class UseCase<out Type : Any?, in Params>(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) {
-
     protected abstract suspend fun buildUseCase(params: Params): Type
 
     suspend fun run(params: Params): Either<Failure, Type> = withContext(dispatcher) {

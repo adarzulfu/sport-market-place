@@ -7,10 +7,10 @@ import retrofit2.http.Path
 interface ProductService {
 
     @GET(PRODUCT)
-    suspend fun getProductList(): List<ProductItemResponse?>
+    suspend fun requestGetProductList(): List<ProductItemResponse?>
 
     @GET(SINGLE_PRODUCT)
-    suspend fun getSingleProduct(@Path("id") id: String): ProductItemResponse
+    suspend fun requestGetSingleProduct(@Path("id") id: String): ProductItemResponse
 
     companion object {
         const val PRODUCT = "/product"
