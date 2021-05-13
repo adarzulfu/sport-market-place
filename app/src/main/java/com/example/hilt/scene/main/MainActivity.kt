@@ -5,6 +5,8 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.hilt.R
 import com.example.hilt.base.BaseActivity
@@ -23,7 +25,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     override fun initialize(savedInstanceState: Bundle?) {
         super.initialize(savedInstanceState)
         initNavHost()
-        observeDestinationChanges()
+        initActionBar()
+    }
+
+    private fun initActionBar() {
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.productListFragment))
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     private fun initNavHost() {
@@ -32,14 +39,13 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         navController = navHostFragment.navController
     }
 
-
-    private fun observeDestinationChanges() {
-        navController.addOnDestinationChangedListener { _, destination, args ->
-            invalidateOptionsMenu()
-        }
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
+        }
         return NavigationUI.onNavDestinationSelected(
             item,
             navController

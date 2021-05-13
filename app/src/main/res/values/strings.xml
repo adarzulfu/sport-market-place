@@ -6,4 +6,11 @@
     <string name="common_error_timeout">Request timed out</string>
     <string name="common_yes">Yes</string>
     <string name="common_no">No</string>
+
+    <string name="transition_name_product_view">productImageTransition</string>
+
+    <string name="screen_title_product_list">Product List</string>
+    <string name="screen_title_product_detail">Product Detail</string>
+
+
 </resources>

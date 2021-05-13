@@ -3,7 +3,10 @@ package com.example.hilt.scene.productlist
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import com.example.hilt.R
 import com.example.hilt.base.BaseFragment
 import com.example.hilt.databinding.FragmentProductListBinding
@@ -11,9 +14,10 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ProductListFragment :
-    BaseFragment<FragmentProductListBinding, ProductListViewModel>(ProductListViewModel::class) {
+    BaseFragment<FragmentProductListBinding, ProductListViewModel>(ProductListViewModel::class),
+    ProductItemClickListener {
 
-    private var adapter: ProductListAdapter = ProductListAdapter()
+    private var adapter: ProductListAdapter = ProductListAdapter(this)
     private var searchMenuItem: MenuItem? = null
     private var profileMenuItem: MenuItem? = null
 
@@ -27,6 +31,13 @@ class ProductListFragment :
         viewModel.loadProductList()
     }
 
+    override fun observeData() {
+        super.observeData()
+        viewModel.productListLiveData.observe(viewLifecycleOwner) {
+            adapter.updateProductList(it)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_product_list, menu)
 
@@ -34,6 +45,23 @@ class ProductListFragment :
 
         configureSearchMenuItem()
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onItemSelected(imageView: ImageView, uiModel: ProductUIModel) {
+        navigateToDetail(imageView, uiModel)
+    }
+
+    private fun navigateToDetail(imageView: ImageView, uiModel: ProductUIModel) {
+
+        val extras = FragmentNavigatorExtras(
+            imageView to uiModel.id
+        )
+        findNavController().navigate(
+            ProductListFragmentDirections
+                .actionProductListFragmentToProductDetailFragment(uiModel.id, uiModel),
+            extras
+        )
     }
 
     private fun configureSearchMenuItem() {
@@ -73,10 +101,4 @@ class ProductListFragment :
         })
     }
 
-    override fun observeData() {
-        super.observeData()
-        viewModel.productListLiveData.observe(viewLifecycleOwner) {
-            adapter.updateProductList(it)
-        }
-    }
 }

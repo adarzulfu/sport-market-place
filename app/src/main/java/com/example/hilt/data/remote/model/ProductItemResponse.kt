@@ -14,5 +14,5 @@ class ProductItemResponse(
     @Json(name = "currency")
     val currency: String?,
     @Json(name = "price")
-    val price: String?,
+    val price: Int?,
 )

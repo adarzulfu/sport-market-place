@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/productListFragment"
         android:name="com.example.hilt.scene.productlist.ProductListFragment"
-        android:label="ProductDetailFragment"
-        tools:layout="@layout/fragment_product_list" >
+        android:label="@string/screen_title_product_list"
+        tools:layout="@layout/fragment_product_list">
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />
@@ -18,7 +18,18 @@
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="com.example.hilt.scene.productdetail.ProductDetailFragment"
-        android:label="ProductDetailFragment"
-        tools:layout="@layout/fragment_product_detail" />
+        android:label="@string/screen_title_product_detail"
+        tools:layout="@layout/fragment_product_detail">
+
+        <argument
+            android:name="transitionId"
+            app:argType="string"
+            app:nullable="true" />
+
+        <argument
+            android:name="productUIModel"
+            app:argType="com.example.hilt.scene.productlist.ProductUIModel"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

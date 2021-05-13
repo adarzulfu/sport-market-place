@@ -5,7 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hilt.databinding.ItemProductBinding
 
-class ProductListAdapter() : RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
+class ProductListAdapter(val clickListener: ProductItemClickListener) :
+    RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
 
     private var productList: List<ProductUIModel>? = null
 
@@ -33,6 +34,10 @@ class ProductListAdapter() : RecyclerView.Adapter<ProductListAdapter.ProductView
                 textViewGroupName.text = uiModel.groupName
                 textViewProductDescription.text = uiModel.description
                 textViewProductName.text = uiModel.productName
+                root.setOnClickListener {
+                    imageViewPreview.transitionName = uiModel.id
+                    clickListener.onItemSelected(imageViewPreview, uiModel)
+                }
             }
         }
     }

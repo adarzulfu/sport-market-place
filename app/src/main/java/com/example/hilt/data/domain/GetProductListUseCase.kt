@@ -4,6 +4,7 @@ import com.example.hilt.data.remote.model.ProductItemResponse
 import com.example.hilt.data.remote.repository.ProductRepository
 import com.example.hilt.internal.util.UseCase
 import com.example.hilt.scene.productlist.ProductUIModel
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -19,10 +20,11 @@ class GetProductListUseCase @Inject constructor(private val productRepository: P
         return productList.mapNotNull { item ->
             if (item != null) {
                 ProductUIModel(
+                    id = item.id ?: UUID.randomUUID().toString(),
                     groupName = "Sample Group Name",
                     productName = item.name ?: "",
                     description = item.description ?: "",
-                    price = item.currency ?: "" + item.price
+                    price = "${item.currency ?: ""} ${item.price ?: ""}"
                 )
             } else {
                 null
