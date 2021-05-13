@@ -75,5 +75,7 @@ open class RatingDialogManager(
         return layoutParams
     }
 
-    fun show() = alertDialogBuilder.show()
+    fun show() {
+        alertDialogBuilder.show()
+    }
 }
