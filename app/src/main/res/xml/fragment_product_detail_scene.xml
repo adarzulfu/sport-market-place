@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+       <KeyFrameSet>
+       </KeyFrameSet>
+        <OnSwipe motion:onTouchUp="autoComplete"
+            motion:touchAnchorId="@id/recyclerViewDetail" />
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/imageViewPreview" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:elevation="1dp"
+            android:id="@+id/imageViewPreview"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/textViewProductName"
+            motion:layout_constraintTop_toTopOf="parent"
+            motion:layout_constraintStart_toEndOf="@+id/imageViewPreview"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="10dp"
+            motion:transitionEasing="cubic(1,0,0.8,0.8)" />
+        <Constraint
+            android:layout_height="0dp"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            motion:layout_constraintTop_toBottomOf="@+id/imageViewPreview"
+            android:id="@+id/recyclerViewDetail"
+            android:layout_marginTop="10dp" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:id="@+id/textViewProductPrice"
+            motion:layout_constraintStart_toEndOf="@+id/imageViewPreview"
+            motion:layout_constraintTop_toBottomOf="@+id/textViewProductName"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="8dp" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            motion:layout_constraintHorizontal_bias="0.0"
+            motion:layout_constraintStart_toStartOf="@+id/textViewProductName"
+            android:id="@+id/textViewProductDescription"
+            motion:layout_constraintTop_toBottomOf="@+id/textViewProductPrice"
+            android:layout_marginTop="8dp" />
+        <Constraint
+            android:layout_height="match_parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            motion:layout_constraintTop_toBottomOf="@+id/imageViewPreview"
+            android:id="@+id/view2" />
+
+        <Constraint
+            android:id="@+id/buttonAddReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/product_detail_add_review"
+            motion:layout_constraintBottom_toBottomOf="@+id/view2"
+            motion:layout_constraintEnd_toEndOf="parent" />
+    </ConstraintSet>
+</MotionScene>
