@@ -2,6 +2,7 @@ package com.example.hilt.data.domain
 
 import com.example.hilt.data.remote.model.ProductItemResponse
 import com.example.hilt.data.remote.repository.ProductRepository
+import com.example.hilt.internal.util.DummyDataGenerator
 import com.example.hilt.internal.util.UseCase
 import com.example.hilt.scene.productlist.ProductUIModel
 import java.text.NumberFormat
@@ -10,7 +11,10 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class GetProductListUseCase @Inject constructor(private val productRepository: ProductRepository) :
+class GetProductListUseCase @Inject constructor(
+    private val productRepository: ProductRepository,
+    val dummyDataGenerator: DummyDataGenerator
+) :
     UseCase<List<ProductUIModel>, UseCase.None>() {
 
     override suspend fun buildUseCase(params: None): List<ProductUIModel> =
@@ -22,10 +26,10 @@ class GetProductListUseCase @Inject constructor(private val productRepository: P
             if (item != null) {
                 ProductUIModel(
                     id = item.id ?: UUID.randomUUID().toString(),
-                    groupName = "Sample Group Name",
+                    imageUrl = getImageUrl(item.id ?: ""),
                     productName = item.name ?: "",
                     description = item.description ?: "",
-                    price = formatPrice(item.price ?: 0, item.currency ?: "")
+                    price = formatPrice(item.price ?: 0)
                 )
             } else {
                 null
@@ -33,7 +37,12 @@ class GetProductListUseCase @Inject constructor(private val productRepository: P
         }
     }
 
-    private fun formatPrice(price: Int, currency: String): String {
+    private fun getImageUrl(id: String): String {
+        val imageList = dummyDataGenerator.dummyImageList
+        return imageList.find { it.id == id }?.img ?: ""
+    }
+
+    private fun formatPrice(price: Int): String {
         val format = NumberFormat.getCurrencyInstance()
         format.currency = Currency.getInstance("USD")
         return format.format(price)

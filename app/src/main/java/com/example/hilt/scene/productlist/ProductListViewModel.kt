@@ -57,7 +57,6 @@ class ProductListViewModel @Inject constructor(
         return initialProductList?.filter {
             it.productName.contains(queryText)
                     || it.description.contains(queryText)
-                    || it.groupName.contains(queryText)
                     || it.price.contains(queryText)
         }
     }

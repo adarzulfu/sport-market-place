@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hilt.databinding.ItemProductBinding
+import com.example.hilt.internal.ext.loadImage
 
 class ProductListAdapter(val clickListener: ProductItemClickListener) :
     RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
@@ -31,6 +32,7 @@ class ProductListAdapter(val clickListener: ProductItemClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(uiModel: ProductUIModel) {
             with(binding) {
+                imageViewPreview.loadImage(uiModel.imageUrl)
                 textViewProductDescription.text = uiModel.description
                 textViewProductName.text = uiModel.productName
                 textViewProductPrice.text = uiModel.price
