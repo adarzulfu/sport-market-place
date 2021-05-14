@@ -64,10 +64,10 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.arch.core:core-testing:$archtesting_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
+    testImplementation "io.mockk:mockk:$mockk_version"
     androidTestImplementation "androidx.test.ext:junit:$junitext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-    androidTestImplementation "io.mockk:mockk:$mockk_version"
 
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }

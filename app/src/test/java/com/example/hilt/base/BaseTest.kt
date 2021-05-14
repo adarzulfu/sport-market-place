@@ -3,7 +3,6 @@ package com.example.hilt.base
 import androidx.annotation.CallSuper
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
-import java.util.Locale
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
