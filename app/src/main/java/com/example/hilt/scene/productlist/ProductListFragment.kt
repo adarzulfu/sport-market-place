@@ -3,6 +3,7 @@ package com.example.hilt.scene.productlist
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
 import androidx.navigation.fragment.FragmentNavigatorExtras
@@ -36,6 +37,11 @@ class ProductListFragment :
         super.observeData()
         viewModel.productListLiveData.observe(viewLifecycleOwner) {
             adapter.updateProductList(it)
+        }
+        viewModel.progressLiveData.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { show ->
+                binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
+            }
         }
     }
 

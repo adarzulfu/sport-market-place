@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.hilt.base.BaseViewModel
 import com.example.hilt.data.domain.GetProductListUseCase
+import com.example.hilt.internal.util.Event
 import com.example.hilt.internal.util.UseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,10 +20,16 @@ class ProductListViewModel @Inject constructor(
     val productListLiveData: LiveData<List<ProductUIModel>>
         get() = _productListLiveData
 
+    private val _progressLiveData = MutableLiveData<Event<Boolean>>()
+    val progressLiveData: LiveData<Event<Boolean>>
+        get() = _progressLiveData
+
     private var initialProductList: List<ProductUIModel>? = null
 
     fun loadProductList() = viewModelScope.launch {
+        showProgress()
         getProductListUseCase.run(UseCase.None).either(::handleFailure, ::handleProductList)
+        hideProgress()
     }
 
     private fun handleProductList(productLis: List<ProductUIModel>) {
@@ -38,6 +45,13 @@ class ProductListViewModel @Inject constructor(
         }
     }
 
+    private fun showProgress() {
+        _progressLiveData.value = Event(true)
+    }
+
+    private fun hideProgress() {
+        _progressLiveData.value = Event(false)
+    }
 
     private fun filterProductList(queryText: String): List<ProductUIModel>? {
         return initialProductList?.filter {
