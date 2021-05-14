@@ -7,6 +7,7 @@ import androidx.core.transition.addListener
 import androidx.navigation.fragment.navArgs
 import com.example.hilt.base.BaseFragment
 import com.example.hilt.databinding.FragmentProductDetailBinding
+import com.example.hilt.internal.ext.loadImage
 import com.example.hilt.scene.productdetail.rating.RatingDialogManager
 import com.example.hilt.scene.productdetail.rating.RatingListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,16 +38,17 @@ class ProductDetailFragment :
         super.initialize()
         with(binding) {
             recyclerViewDetail.adapter = reviewAdapter
-            textViewProductDescription.text = args.productUIModel?.description
-            textViewProductName.text = args.productUIModel?.productName
-            textViewProductPrice.text = args.productUIModel?.price
+            textViewProductDescription.text = args.productUIModel.description
+            textViewProductName.text = args.productUIModel.productName
+            textViewProductPrice.text = args.productUIModel.price
             imageViewPreview.transitionName = args.transitionId
+            binding.imageViewPreview.loadImage(args.productUIModel.imageUrl,null)
             buttonAddReview.setOnClickListener { showRatingDialog() }
         }
     }
 
     private fun onUIReady() {
-        args.productUIModel?.id?.let {
+        args.productUIModel.id.let {
             viewModel.saveProductId(it)
             viewModel.loadReviews(it)
         }
