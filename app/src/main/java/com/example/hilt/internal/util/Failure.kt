@@ -9,6 +9,5 @@ sealed class Failure : IOException() {
     object NoConnectivityError : Failure()
     object EmptyResponse : Failure()
 
-    /** * Extend this class for feature specific failures.*/
     abstract class FeatureFailure : Failure()
 }

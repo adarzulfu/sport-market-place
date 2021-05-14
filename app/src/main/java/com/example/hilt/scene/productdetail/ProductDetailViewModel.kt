@@ -47,4 +47,8 @@ class ProductDetailViewModel @Inject constructor(
             _reviewListLiveData.value = reviewUiList
         }
     }
+
+    override fun retryRequested() {
+        loadReviews(productId)
+    }
 }

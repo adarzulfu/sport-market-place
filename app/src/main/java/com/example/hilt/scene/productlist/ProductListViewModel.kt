@@ -47,4 +47,8 @@ class ProductListViewModel @Inject constructor(
                     || it.price.contains(queryText)
         }
     }
+
+    override fun retryRequested() {
+        loadProductList()
+    }
 }

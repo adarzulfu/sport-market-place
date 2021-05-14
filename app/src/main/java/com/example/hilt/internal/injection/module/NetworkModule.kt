@@ -3,6 +3,8 @@ package com.example.hilt.internal.injection.module
 import com.example.hilt.BuildConfig
 import com.example.hilt.data.remote.ProductService
 import com.example.hilt.data.remote.ReviewService
+import com.example.hilt.internal.util.ErrorHandlingInterceptor
+import com.example.hilt.internal.util.NetworkStateHolder
 import com.squareup.moshi.Moshi
 import dagger.Lazy
 import dagger.Module
@@ -34,6 +36,7 @@ object NetworkModule {
         val httpClient = OkHttpClient.Builder()
             .connectTimeout(CLIENT_TIME_OUT_SEC, TimeUnit.SECONDS)
             .readTimeout(CLIENT_TIME_OUT_SEC, TimeUnit.SECONDS)
+            .addInterceptor(ErrorHandlingInterceptor(NetworkStateHolder))
             .addInterceptor(loggingInterceptor)
 
         return httpClient.build()

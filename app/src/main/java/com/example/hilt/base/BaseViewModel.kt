@@ -11,6 +11,9 @@ open class BaseViewModel : ViewModel() {
     private val _failure = MutableLiveData<Event<Failure>>()
     val failure: LiveData<Event<Failure>> get() = _failure
 
+    open fun retryRequested(){
+        // Do nothing in here. Child classes should implement when necessary
+    }
 
     protected open fun handleFailure(failure: Failure) {
         _failure.value = Event(failure)
