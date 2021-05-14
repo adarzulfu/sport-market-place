@@ -44,7 +44,7 @@ android {
 dependencies {
 
 
-    implementation "io.mockk:mockk:$mockk_version"
+
     implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
@@ -67,6 +67,7 @@ dependencies {
     androidTestImplementation "com.squareup.okhttp3:mockwebserver:$okhttp_version"
     androidTestImplementation "androidx.test.ext:junit:$junitext_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "io.mockk:mockk:$mockk_version"
 
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }
