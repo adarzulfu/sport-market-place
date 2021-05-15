@@ -16,6 +16,6 @@
 
     <style name="Theme.Hilt.Splash">
         <item name="colorPrimaryDark">@android:color/black</item>
-        <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:windowBackground">@drawable/bg_layout_splash</item>
     </style>
 </resources>
