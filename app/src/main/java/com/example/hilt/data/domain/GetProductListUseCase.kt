@@ -13,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 class GetProductListUseCase @Inject constructor(
     private val productRepository: ProductRepository,
-    val dummyDataGenerator: DummyDataGenerator
+    private val dummyDataGenerator: DummyDataGenerator
 ) :
     UseCase<List<ProductUIModel>, UseCase.None>() {
 

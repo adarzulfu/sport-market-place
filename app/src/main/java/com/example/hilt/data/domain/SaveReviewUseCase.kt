@@ -1,6 +1,5 @@
 package com.example.hilt.data.domain
 
-import com.example.hilt.data.remote.model.SaveReviewRequestModel
 import com.example.hilt.data.remote.repository.ReviewRepository
 import com.example.hilt.internal.util.UseCase
 import javax.inject.Inject
@@ -11,14 +10,12 @@ class SaveReviewUseCase @Inject constructor(private val reviewRepository: Review
     UseCase<Unit, SaveReviewUseCase.Params>() {
 
     override suspend fun buildUseCase(params: Params) {
-        val requestModel =
-            SaveReviewRequestModel(
-                productId = params.productId,
-                locale = params.locale,
-                rating = params.rating,
-                text = params.comment
-            )
-        reviewRepository.saveReview(requestModel)
+        reviewRepository.saveReview(
+            productId = params.productId,
+            locale = params.locale,
+            rating = params.rating,
+            comment = params.comment
+        )
     }
 
     class Params(

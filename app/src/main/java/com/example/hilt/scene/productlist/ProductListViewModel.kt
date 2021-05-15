@@ -32,17 +32,17 @@ class ProductListViewModel @Inject constructor(
         hideProgress()
     }
 
-    private fun handleProductList(productLis: List<ProductUIModel>) {
-        _productListLiveData.value = productLis
-        initialProductList = productLis
-    }
-
     fun onQueryTextChange(queryText: String) {
         _productListLiveData.value = if (queryText.isEmpty()) {
             initialProductList
         } else {
             filterProductList(queryText)
         }
+    }
+
+    private fun handleProductList(productLis: List<ProductUIModel>) {
+        _productListLiveData.value = productLis
+        initialProductList = productLis
     }
 
     private fun showProgress() {

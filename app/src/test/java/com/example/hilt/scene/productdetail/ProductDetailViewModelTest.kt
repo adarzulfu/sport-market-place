@@ -12,7 +12,7 @@ import io.mockk.slot
 import org.junit.Assert
 import org.junit.Test
 
-class ProductViewModelTest : BaseTest() {
+class ProductDetailViewModelTest : BaseTest() {
 
     @MockK
     lateinit var getReviewListUseCase: GetReviewListUseCase
