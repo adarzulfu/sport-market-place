@@ -2,10 +2,13 @@ package com.example.hilt.scene.productdetail.rating
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.drawable.LayerDrawable
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.RatingBar
 import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.example.hilt.R
 
 
@@ -47,6 +50,23 @@ open class RatingDialogManager(
     private fun createRatingView(): RatingBar {
         val rating = RatingBar(context)
         val layoutParams = createCommonLayoutParams()
+
+        layoutParams.topMargin = context.resources.getDimension(R.dimen.margin_medium).toInt()
+        layoutParams.marginStart = context.resources.getDimension(R.dimen.margin_medium).toInt()
+        val layers = rating.progressDrawable as LayerDrawable
+        DrawableCompat.setTint(
+            layers.getDrawable(0),
+            ContextCompat.getColor(context, R.color.black)
+        )
+        DrawableCompat.setTint(
+            layers.getDrawable(1),
+            ContextCompat.getColor(context, R.color.transparent)
+        )
+
+        DrawableCompat.setTint(
+            layers.getDrawable(2),
+            ContextCompat.getColor(context, R.color.seafoam)
+        )
 
         rating.layoutParams = layoutParams
         rating.numStars = totalRatingCount

@@ -5,9 +5,10 @@ import android.transition.TransitionInflater
 import android.transition.TransitionSet
 import androidx.core.transition.addListener
 import androidx.navigation.fragment.navArgs
+import com.example.hilt.R
 import com.example.hilt.base.BaseFragment
 import com.example.hilt.databinding.FragmentProductDetailBinding
-import com.example.hilt.internal.ext.loadImage
+import com.example.hilt.internal.ext.loadImageForSharedAnimation
 import com.example.hilt.scene.productdetail.rating.RatingDialogManager
 import com.example.hilt.scene.productdetail.rating.RatingListener
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,28 +27,40 @@ class ProductDetailFragment :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
-        val transitionSet = sharedElementEnterTransition as TransitionSet?
-        transitionSet?.addListener(onEnd = {
-            onUIReady()
-        })
+        setSharedElementTransitionEnter()
     }
 
     override fun initialize() {
         super.initialize()
+        postponeEnterTransition()
+        setUiForTransitionAnimations()
+
         with(binding) {
             recyclerViewDetail.adapter = reviewAdapter
             textViewProductDescription.text = args.productUIModel.description
             textViewProductName.text = args.productUIModel.productName
             textViewProductPrice.text = args.productUIModel.price
-            imageViewPreview.transitionName = args.transitionId
-            binding.imageViewPreview.loadImage(args.productUIModel.imageUrl,null)
             buttonAddReview.setOnClickListener { showRatingDialog() }
         }
     }
 
-    private fun onUIReady() {
+    private fun setUiForTransitionAnimations() {
+        binding.imageViewPreview1.transitionName = args.productUIModel.id
+        binding.imageViewPreview1.loadImageForSharedAnimation(args.productUIModel.imageUrl) {
+            startPostponedEnterTransition()
+        }
+    }
+
+    private fun setSharedElementTransitionEnter() {
+        sharedElementEnterTransition = TransitionInflater.from(requireContext())
+            .inflateTransition(R.transition.change_image_transform)
+        val transitionSet = sharedElementEnterTransition as TransitionSet?
+        transitionSet?.addListener(onEnd = {
+            onTransitionAnimationCompleted()
+        })
+    }
+
+    private fun onTransitionAnimationCompleted() {
         args.productUIModel.id.let {
             viewModel.saveProductId(it)
             viewModel.loadReviews(it)

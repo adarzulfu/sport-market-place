@@ -1,4 +1,4 @@
-package com.example.hilt.scene.productlist
+package com.example.hilt.scene.uimodel
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -4,6 +4,7 @@ import com.example.hilt.base.BaseTest
 import com.example.hilt.data.domain.GetReviewListUseCase
 import com.example.hilt.data.domain.SaveReviewUseCase
 import com.example.hilt.internal.util.Either
+import com.example.hilt.scene.uimodel.ReviewUIModel
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.impl.annotations.InjectMockKs
@@ -12,7 +13,7 @@ import io.mockk.slot
 import org.junit.Assert
 import org.junit.Test
 
-class ProductViewModelTest : BaseTest() {
+class ProductDetailViewModelTest : BaseTest() {
 
     @MockK
     lateinit var getReviewListUseCase: GetReviewListUseCase

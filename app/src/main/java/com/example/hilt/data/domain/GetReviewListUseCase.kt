@@ -3,7 +3,7 @@ package com.example.hilt.data.domain
 import com.example.hilt.data.remote.model.ReviewSingleItemResponseModel
 import com.example.hilt.data.remote.repository.ReviewRepository
 import com.example.hilt.internal.util.UseCase
-import com.example.hilt.scene.productdetail.ReviewUIModel
+import com.example.hilt.scene.uimodel.ReviewUIModel
 import javax.inject.Inject
 import javax.inject.Singleton
 

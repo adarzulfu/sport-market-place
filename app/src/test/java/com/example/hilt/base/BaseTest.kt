@@ -1,6 +1,5 @@
 package com.example.hilt.base
 
-import androidx.annotation.CallSuper
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import io.mockk.MockKAnnotations
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +15,7 @@ abstract class BaseTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
-    val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
     @Before
     fun before() {
@@ -34,7 +33,6 @@ abstract class BaseTest {
         tearDown()
     }
 
-    @CallSuper
-    abstract fun setUp()
+    open fun setUp() {}
     open fun tearDown() {}
 }

@@ -2,7 +2,6 @@ package com.example.hilt.scene.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -16,7 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
-    private val mainViewModel: MainViewModel by viewModels()
     lateinit var navController: NavController
 
     override fun provideViewBinding(): ActivityMainBinding =

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hilt.databinding.ItemProductBinding
 import com.example.hilt.internal.ext.loadImage
+import com.example.hilt.scene.uimodel.ProductUIModel
 
 class ProductListAdapter(val clickListener: ProductItemClickListener) :
     RecyclerView.Adapter<ProductListAdapter.ProductViewHolder>() {
@@ -36,8 +37,8 @@ class ProductListAdapter(val clickListener: ProductItemClickListener) :
                 textViewProductDescription.text = uiModel.description
                 textViewProductName.text = uiModel.productName
                 textViewProductPrice.text = uiModel.price
+                imageViewPreview.transitionName = uiModel.id
                 root.setOnClickListener {
-                    imageViewPreview.transitionName = uiModel.id
                     clickListener.onItemSelected(imageViewPreview, uiModel)
                 }
             }

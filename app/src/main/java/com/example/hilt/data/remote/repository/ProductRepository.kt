@@ -11,8 +11,4 @@ class ProductRepository @Inject constructor(
 ) {
     suspend fun getProductList() =
         productRemoteDataSource.requestProductList()
-
-    suspend fun getSingleProduct(id: String) =
-        productRemoteDataSource
-            .requestSingleProduct(id = id)
 }

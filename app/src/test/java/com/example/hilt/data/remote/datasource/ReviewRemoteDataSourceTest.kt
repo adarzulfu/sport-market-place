@@ -30,6 +30,8 @@ class ReviewRemoteDataSourceTest : BaseRemoteDataSourceTest() {
 
             // Then
             Assert.assertTrue(response?.size == 3)
+            Assert.assertTrue(response?.first()?.productId == "HI333")
+            Assert.assertTrue(response?.first()?.rating == 0)
         }
     }
 
@@ -39,7 +41,7 @@ class ReviewRemoteDataSourceTest : BaseRemoteDataSourceTest() {
                 "productId": "HI333",
                 "locale": "tr,en;q=0.9",
                 "rating": 0,
-                "text": "string"
+                "text": "text"
             },
             {
                 "productId": "HI333",
