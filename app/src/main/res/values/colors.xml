@@ -6,9 +6,11 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="seafoam">#71EEB8</color>
+    <color name="light_seafoam">#5B8DEDC4</color>
     <color name="ford_seafoam">#8BC34A</color>
     <color name="black">#FF000000</color>
-    <color name="black_transparent">#59000000</color>
+    <color name="transparent">#00FFFFFF</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#D3D3D3</color>
+    <color name="light_gray">#eceef0</color>
 </resources>

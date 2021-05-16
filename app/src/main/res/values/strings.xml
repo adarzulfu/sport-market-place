@@ -17,6 +17,7 @@
     <string name="screen_title_product_detail">Product Detail</string>
 
     <string name="product_detail_add_review">Add Review</string>
+    <string name="product_detail_no_review">No review found</string>
     <string name="internet_connection_text">No internet connection, Retry? </string>
     <string name="internet_connection_button">Retry?</string>
 

@@ -3,9 +3,13 @@ package com.example.hilt.scene.productdetail
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.hilt.R
 import com.example.hilt.base.BaseViewModel
 import com.example.hilt.data.domain.GetReviewListUseCase
 import com.example.hilt.data.domain.SaveReviewUseCase
+import com.example.hilt.scene.uimodel.BaseReviewUIModel
+import com.example.hilt.scene.uimodel.NoReviewUIModel
+import com.example.hilt.scene.uimodel.ReviewUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,8 +21,8 @@ class ProductDetailViewModel @Inject constructor(
 ) : BaseViewModel() {
 
 
-    private val _reviewListLiveData = MutableLiveData<List<ReviewUIModel>>()
-    val reviewListLiveData: LiveData<List<ReviewUIModel>>
+    private val _reviewListLiveData = MutableLiveData<List<BaseReviewUIModel>>()
+    val reviewListLiveData: LiveData<List<BaseReviewUIModel>>
         get() = _reviewListLiveData
 
     private var productId: String = ""
@@ -45,6 +49,8 @@ class ProductDetailViewModel @Inject constructor(
     private fun handleReviewList(reviewUiList: List<ReviewUIModel>) {
         if (reviewUiList.isNotEmpty()) {
             _reviewListLiveData.value = reviewUiList
+        } else {
+            _reviewListLiveData.value = listOf(NoReviewUIModel(R.string.product_detail_no_review))
         }
     }
 

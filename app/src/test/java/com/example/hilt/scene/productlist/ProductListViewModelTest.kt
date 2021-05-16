@@ -3,6 +3,7 @@ package com.example.hilt.scene.productlist
 import com.example.hilt.base.BaseTest
 import com.example.hilt.data.domain.GetProductListUseCase
 import com.example.hilt.internal.util.Either
+import com.example.hilt.scene.uimodel.ProductUIModel
 import io.mockk.coEvery
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK

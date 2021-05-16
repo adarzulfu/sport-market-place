@@ -7,6 +7,7 @@ import com.example.hilt.base.BaseViewModel
 import com.example.hilt.data.domain.GetProductListUseCase
 import com.example.hilt.internal.util.Event
 import com.example.hilt.internal.util.UseCase
+import com.example.hilt.scene.uimodel.ProductUIModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

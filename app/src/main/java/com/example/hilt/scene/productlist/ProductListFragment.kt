@@ -1,17 +1,18 @@
 package com.example.hilt.scene.productlist
 
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.os.Bundle
+import android.transition.TransitionInflater
+import android.view.*
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.example.hilt.R
 import com.example.hilt.base.BaseFragment
 import com.example.hilt.databinding.FragmentProductListBinding
 import com.example.hilt.internal.ext.hideKeyboard
+import com.example.hilt.scene.uimodel.ProductUIModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,8 +27,14 @@ class ProductListFragment :
     override fun provideViewBinding(): FragmentProductListBinding =
         FragmentProductListBinding.inflate(layoutInflater)
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setSharedElementTransitionEnter()
+    }
+
     override fun initialize() {
         super.initialize()
+        postponeEnterTransition()
         setHasOptionsMenu(true)
         binding.recyclerViewProductList.adapter = adapter
         viewModel.loadProductList()
@@ -37,12 +44,24 @@ class ProductListFragment :
         super.observeData()
         viewModel.productListLiveData.observe(viewLifecycleOwner) {
             adapter.updateProductList(it)
+            listenOnUiDrawn()
         }
         viewModel.progressLiveData.observe(viewLifecycleOwner) {
             it.getContentIfNotHandled()?.let { show ->
                 binding.progressBar.visibility = if (show) View.VISIBLE else View.GONE
             }
         }
+    }
+
+    private fun listenOnUiDrawn() {
+        (view?.parent as? ViewGroup)?.doOnPreDraw {
+            startPostponedEnterTransition()
+        }
+    }
+
+    private fun setSharedElementTransitionEnter() {
+        sharedElementEnterTransition = TransitionInflater.from(requireContext())
+            .inflateTransition(R.transition.change_image_transform)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

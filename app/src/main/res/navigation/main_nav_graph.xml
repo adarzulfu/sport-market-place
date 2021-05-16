@@ -28,7 +28,7 @@
 
         <argument
             android:name="productUIModel"
-            app:argType="com.example.hilt.scene.productlist.ProductUIModel" />
+            app:argType="com.example.hilt.scene.uimodel.ProductUIModel" />
     </fragment>
 
 </navigation>

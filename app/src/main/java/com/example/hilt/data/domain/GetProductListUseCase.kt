@@ -4,7 +4,7 @@ import com.example.hilt.data.remote.model.ProductItemResponse
 import com.example.hilt.data.remote.repository.ProductRepository
 import com.example.hilt.internal.util.DummyDataGenerator
 import com.example.hilt.internal.util.UseCase
-import com.example.hilt.scene.productlist.ProductUIModel
+import com.example.hilt.scene.uimodel.ProductUIModel
 import java.text.NumberFormat
 import java.util.*
 import javax.inject.Inject
